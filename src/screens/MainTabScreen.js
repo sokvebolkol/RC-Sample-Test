@@ -5,11 +5,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Icon from "react-native-vector-icons/Ionicons";
 
-import DetailScreen from "./DetailScreen";
-import ExploreScreen from "./ExploreScreen";
+import MoreScreen from "./MoreScreen";
 import HomeScreen from "./HomeScreen";
 import NotificationsScreen from "./NotificationScreen";
 import ProfileScreen from "./ProfileScreen";
+import color from "../config/color";
 
 const Stack = createStackNavigator();
 
@@ -17,14 +17,14 @@ const Tab = createMaterialBottomTabNavigator();
 
 const MainTabScreen = () => {
   return (
-    <Tab.Navigator initialRouteName="Home" activeColor="#fff">
+    <Tab.Navigator initialRouteName="Home" activeColor={color.white}>
       {/* Home tab  */}
       <Tab.Screen
         name="Home"
         component={homeStackScreen}
         options={{
           tabBarLabel: "Home",
-          tabBarColor: "#009387",
+          tabBarColor: color.primary,
           tabBarIcon: ({ color }) => (
             <Icon name="ios-home" color={color} size={26} />
           ),
@@ -36,7 +36,7 @@ const MainTabScreen = () => {
         component={notificationStackScreen}
         options={{
           tabBarLabel: "Notification",
-          tabBarColor: "#ff1a8c",
+          tabBarColor: color.primary,
           tabBarIcon: ({ color }) => (
             <Icon name="ios-notifications" color={color} size={26} />
           ),
@@ -48,7 +48,7 @@ const MainTabScreen = () => {
         component={profileStackScreen}
         options={{
           tabBarLabel: "Profile",
-          tabBarColor: "#694fad",
+          tabBarColor: color.primary,
           tabBarIcon: ({ color }) => (
             <Icon name="ios-person" color={color} size={26} />
           ),
@@ -56,13 +56,13 @@ const MainTabScreen = () => {
       />
       {/* Explore Tab  */}
       <Tab.Screen
-        name="Explore"
-        component={exploreStackScreen}
+        name="MoreScreen"
+        component={MoreStackScreen}
         options={{
-          tabBarLabel: "Explore",
-          tabBarColor: "#1f65ff",
+          tabBarLabel: "More",
+          tabBarColor: color.primary,
           tabBarIcon: ({ color }) => (
-            <Icon name="ios-aperture" color={color} size={26} />
+            <Icon name="ellipsis-horizontal-outline" color={color} size={26} />
           ),
         }}
       />
@@ -77,9 +77,9 @@ const homeStackScreen = ({ navigation }) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#009387",
+          backgroundColor: color.primary,
         },
-        headerTintColor: "#fff",
+        headerTintColor: color.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
@@ -90,14 +90,6 @@ const homeStackScreen = ({ navigation }) => {
         component={HomeScreen}
         options={{
           title: "Overview",
-          headerLeft: () => (
-            <Icon.Button
-              name="ios-menu"
-              size={25}
-              backgroundColor="#009387"
-              onPress={() => navigation.openDrawer()}
-            ></Icon.Button>
-          ),
         }}
       />
     </Stack.Navigator>
@@ -108,9 +100,9 @@ const notificationStackScreen = ({ navigation }) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#ff1a8c",
+          backgroundColor: color.primary,
         },
-        headerTintColor: "#fff",
+        headerTintColor: color.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
@@ -121,14 +113,14 @@ const notificationStackScreen = ({ navigation }) => {
         component={NotificationsScreen}
         options={{
           title: "Notification",
-          headerLeft: () => (
-            <Icon.Button
-              name="ios-menu"
-              size={25}
-              backgroundColor="#ff1a8c"
-              onPress={() => navigation.openDrawer()}
-            ></Icon.Button>
-          ),
+          // headerLeft: () => (
+          //   <Icon.Button
+          //     name="ios-menu"
+          //     size={25}
+          //     backgroundColor="#ff1a8c"
+          //     onPress={() => navigation.openDrawer()}
+          //   ></Icon.Button>
+          // ),
         }}
       />
     </Stack.Navigator>
@@ -140,9 +132,9 @@ const profileStackScreen = ({ navigation }) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#694fad",
+          backgroundColor: color.primary,
         },
-        headerTintColor: "#fff",
+        headerTintColor: color.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
@@ -151,47 +143,27 @@ const profileStackScreen = ({ navigation }) => {
       <Stack.Screen
         name="Profile"
         component={ProfileScreen}
-        options={{
-          headerLeft: () => (
-            <Icon.Button
-              name="ios-menu"
-              size={25}
-              backgroundColor="#694fad"
-              onPress={() => navigation.openDrawer()}
-            ></Icon.Button>
-          ),
-        }}
       />
     </Stack.Navigator>
   );
 };
 
-const exploreStackScreen = ({ navigation }) => {
+const MoreStackScreen = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#1f65ff",
+          backgroundColor: color.primary,
         },
-        headerTintColor: "#fff",
+        headerTintColor: color.white,
         headerTitleStyle: {
           fontWeight: "bold",
         },
       }}
     >
       <Stack.Screen
-        name="Explore"
-        component={ExploreScreen}
-        options={{
-          headerLeft: () => (
-            <Icon.Button
-              name="ios-menu"
-              size={25}
-              backgroundColor="#1f65ff"
-              onPress={() => navigation.openDrawer()}
-            ></Icon.Button>
-          ),
-        }}
+        name="More"
+        component={MoreScreen}
       />
     </Stack.Navigator>
   );

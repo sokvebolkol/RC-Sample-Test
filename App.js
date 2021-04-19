@@ -151,7 +151,11 @@ const App = () => {
 
   return (
     <PaperProvider theme={theme}>
-      <AuthContext.Provider value={authContext}>
+      <NavigationContainer theme={theme}>
+        <MainTabScreen/>
+      </NavigationContainer>
+      
+      {/* <AuthContext.Provider value={authContext}>
         <NavigationContainer theme={theme}>
           {loginState?.userToken !== null ? (
             <Drawer.Navigator
@@ -166,7 +170,7 @@ const App = () => {
             <RootStackScreen />
           )}
         </NavigationContainer>
-      </AuthContext.Provider>
+      </AuthContext.Provider> */}
     </PaperProvider>
   );
 };
