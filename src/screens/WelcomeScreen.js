@@ -19,7 +19,7 @@ function WelcomeScreen(props) {
         source={require("../assets/68e68dd48832a5f25ab49e0f0a87549c.jpg")}
       >
         <View style={styles.loginButton}></View>
-        <View style={styles.regitsterButton}></View>
+        <View style={styles.registerButton}></View>
       </ImageBackground>
     </>
   );
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     height: 70,
     backgroundColor: color.primary,
   },
-  regitsterButton: {
+  registerButton: {
     width: "100%",
     height: 70,
     backgroundColor: color.secondary,

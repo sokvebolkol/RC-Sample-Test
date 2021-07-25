@@ -16,17 +16,16 @@ import {
 import { ActivityIndicator, View } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
-import MainTabScreen from "./src/screens/MainTabScreen";
-import SupportScreen from "./src/screens/SupportScreen";
-import SettingScreen from "./src/screens/SettingScreen";
-import BookmarkScreen from "./src/screens/BookMarkScreen";
+import MainTabScreen from "./src/navigation/MainTabScreen";
 import { AuthContext } from "./src/components/context";
 
 import CustomDrawer from "./src/screens/CustomDrawer";
-import RootStackScreen from "./src/screens/RootStackScreen";
+import RootStackScreen from "./src/navigation/RootStackScreen";
+
 const Drawer = createDrawerNavigator();
 
 const App = () => {
+  
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
   const initialLoginState = {
@@ -158,9 +157,6 @@ const App = () => {
               drawerContent={(props) => <CustomDrawer {...props} />}
             >
               <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
-              <Drawer.Screen name="SupportScreen" component={SupportScreen} />
-              <Drawer.Screen name="SettingsScreen" component={SettingScreen} />
-              <Drawer.Screen name="BookmarkScreen" component={BookmarkScreen} />
             </Drawer.Navigator>
           ) : (
             <RootStackScreen />

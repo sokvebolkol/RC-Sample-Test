@@ -1,12 +1,11 @@
 import React from "react";
-
 import { createStackNavigator } from "@react-navigation/stack";
-
-import SplashScreen from "./SplashScreen";
-import SignInScreen from "./SignInScreen";
-import SignUpScreen from "./SignUpScreen";
+import SplashScreen from "../screens/auth/SplashScreen";
+import SignInScreen from "../screens/auth/SignInScreen";
+import SignUpScreen from "../screens/auth/SignUpScreen";
 
 const RootStack = createStackNavigator();
+
 const RootStackScreen = (navigation) => {
   return (
     <RootStack.Navigator headerMode="none">
@@ -16,4 +15,5 @@ const RootStackScreen = (navigation) => {
     </RootStack.Navigator>
   );
 };
+
 export default RootStackScreen;
