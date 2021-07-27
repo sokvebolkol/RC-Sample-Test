@@ -1,124 +1,170 @@
-// Example to Send Text SMS on Button Click in React Native
-// https://aboutreact.com/send-text-sms-in-react-native/
-
-// import React in our code
-import React, {useState} from 'react';
-
-// import all the components we are going to use
+import React, { useReducer, useEffect, useMemo } from "react";
 import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  Linking,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+  NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+} from "@react-navigation/native";
 
-// import SMS API
-import SendSMS from 'react-native-sms';
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
+import {
+  Provider as PaperProvider,
+  DefaultTheme as PaperDefaultTheme,
+  DarkTheme as PaperDarkTheme,
+} from "react-native-paper";
+
+import { ActivityIndicator, View } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+
+import MainTabScreen from "./src/navigation/MainTabScreen";
+import { AuthContext } from "./src/components/context";
+
+import CustomDrawer from "./src/screens/CustomDrawer";
+import RootStackScreen from "./src/navigation/RootStackScreen";
+
+const Drawer = createDrawerNavigator();
 
 const App = () => {
-  const [mobileNumber, setMobileNumber] = useState('9999999999');
-  const [bodySMS, setBodySMS] = useState(
-    'Please follow https://aboutreact.com',
-  );
+  
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
-  const initiateSMS = () => {
-    // Linking.openURL(`sms:&addresses=null&body=My sms text`);
-    // Check for perfect 10 digit length
-    if (mobileNumber.length != 10) {
-      alert('Please insert correct contact number');
-      return;
-    }
-
-    SendSMS.send(
-      {
-        // Message body
-        body: bodySMS,
-        // Recipients Number
-        recipients: [mobileNumber],
-        // An array of types that would trigger a "completed" response when using android
-        successTypes: ['sent', 'queued'],
-      },
-      (completed, cancelled, error) => {
-        if (completed) {
-          console.log('SMS Sent Completed');
-        } else if (cancelled) {
-          console.log('SMS Sent Cancelled');
-        } else if (error) {
-          console.log('Some error occured');
-        }
-      },
-    );
+  const initialLoginState = {
+    isLoading: true,
+    userName: null,
+    userToken: null,
   };
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <Text style={styles.titleText}>
-          Example to Send Text SMS on Button Click in React Native
-        </Text>
-        <Text style={styles.titleTextsmall}>Enter Mobile Number</Text>
-        <TextInput
-          value={mobileNumber}
-          onChangeText={(mobileNumber) => setMobileNumber(mobileNumber)}
-          placeholder={'Enter Conatct Number to Call'}
-          keyboardType="numeric"
-          style={styles.textInput}
-        />
-        <Text style={styles.titleTextsmall}>Enter SMS body</Text>
-        <TextInput
-          value={bodySMS}
-          onChangeText={(bodySMS) => setBodySMS(bodySMS)}
-          placeholder={'Enter Conatct Number to Call'}
-          keyboardType="numeric"
-          style={styles.textInput}
-        />
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={styles.buttonStyle}
-          onPress={initiateSMS}>
-          <Text style={styles.buttonTextStyle}>Send Message</Text>
-        </TouchableOpacity>
+  const CustomDefaultTheme = {
+    ...NavigationDefaultTheme,
+    ...PaperDefaultTheme,
+    colors: {
+      ...NavigationDefaultTheme.colors,
+      ...PaperDefaultTheme.colors,
+      background: "#ffffff",
+      text: "#333333",
+    },
+  };
+
+  const CustomDarkTheme = {
+    ...NavigationDarkTheme,
+    ...PaperDarkTheme,
+    colors: {
+      ...NavigationDarkTheme.colors,
+      ...PaperDarkTheme.colors,
+      background: "#333333",
+      text: "#ffffff",
+    },
+  };
+
+  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+
+  const loginReducer = (prevState, action) => {
+    switch (action.type) {
+      case "RETRIEVE_TOKEN":
+        return {
+          ...prevState,
+          userName: action.id,
+          userToken: action.token,
+          isLoading: false,
+        };
+      case "LOGIN":
+        return {
+          ...prevState,
+          userName: action.id,
+          userToken: action.token,
+          isLoading: false,
+        };
+      case "LOGOUT":
+        return {
+          ...prevState,
+          userName: null,
+          userToken: null,
+          isLoading: false,
+        };
+      case "REGISTER":
+        return {
+          ...prevState,
+          userName: action.id,
+          userToken: action.token,
+          isLoading: false,
+        };
+    }
+  };
+
+  const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
+
+  const authContext = useMemo(
+    () => ({
+      signIn: async (foundUser) => {
+        const userToken = String(foundUser[0].userToken);
+        const userName = String(foundUser[0].username);
+        try {
+          await AsyncStorage.setItem("userToken", userToken);
+        } catch (e) {
+          console.log(e);
+        }
+        console.log("userToken ", userToken);
+        dispatch({ type: "LOGIN", id: userName, token: userToken });
+      },
+      signOut: async () => {
+        try {
+          userToken = await AsyncStorage.removeItem("User Token");
+        } catch (e) {
+          console.log("error", e);
+        }
+        dispatch({ type: "LOGOUT" });
+      },
+      // this method not yet implement
+      signUp: () => {
+        setUserToken("kkk");
+        isLoading(false);
+      },
+      toggleTheme: () => {
+        setIsDarkTheme((isDarkTheme) => !isDarkTheme);
+      },
+    }),
+    []
+  );
+
+  useEffect(() => {
+    setTimeout(async () => {
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem("User Token");
+      } catch (e) {
+        console.log("error", e);
+      }
+      console.log("userToken is", userToken);
+      dispatch({ type: "RETRIEVE_TOKEN", token: userToken });
+    }, 1000);
+  }, []);
+
+  if (loginState?.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
       </View>
-    </SafeAreaView>
+    );
+  }
+
+  return (
+    <PaperProvider theme={theme}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer theme={theme}>
+          {loginState?.userToken !== null ? (
+            <Drawer.Navigator
+              drawerContent={(props) => <CustomDrawer {...props} />}
+            >
+              <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+            </Drawer.Navigator>
+          ) : (
+            <RootStackScreen />
+          )}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </PaperProvider>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    padding: 10,
-    textAlign: 'center',
-  },
-  titleText: {
-    fontSize: 22,
-    textAlign: 'center',
-    fontWeight: 'bold',
-  },
-  titleTextsmall: {
-    marginVertical: 8,
-    fontSize: 16,
-  },
-  buttonStyle: {
-    justifyContent: 'center',
-    marginTop: 15,
-    padding: 10,
-    backgroundColor: '#8ad24e',
-  },
-  buttonTextStyle: {
-    color: '#fff',
-    textAlign: 'center',
-  },
-  textInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: '100%',
-    paddingHorizontal: 10,
-  },
-});
