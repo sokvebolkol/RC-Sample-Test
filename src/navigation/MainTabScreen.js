@@ -133,11 +133,12 @@ const AccountStackScreen = ({navigation}) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: colors.placeholderBackground,
+          backgroundColor: colors.primary,
         },
         headerTintColor: 'black',
         headerTitleStyle: {
           fontWeight: 'bold',
+          color:'#fff'
         },
       }}>
       <Stack.Screen name="Account" component={AccountScreen} options={{}} />
