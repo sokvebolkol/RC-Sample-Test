@@ -9,65 +9,85 @@ import HomeScreen from '../screens/HomeScreen';
 import DeliveryScreen from '../screens/DeliveryScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import AccountScreen from '../screens/AccountScreen';
+import PaymentListScreen from '../screens/PaymentList/PaymentListScreen';
 
 import colors from '../common/colors';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
+// const RootStackScreen = (navigation) => {
+//   return (
+//     <RootStack.Navigator headerMode="none">
+//       <RootStack.Screen name="SplashScreen" component={SplashScreen} />
+//       <RootStack.Screen name="LoginScreen" component={LoginScreen} />
+//     </RootStack.Navigator>
+//   );
+// };
+
 const MainTabScreen = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      activeColor={colors.primary}
-      inactiveColor={colors.placeholder}>
-      {/* Home tab  */}
-      <Tab.Screen
-        name="Home"
-        component={HomeStackScreen}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarColor: colors.placeholderBackground,
-          tabBarIcon: ({color}) => (
-            <Icon name="home-outline" color={color} size={26} />
-          ),
-        }}
+    <>
+      <Tab.Navigator
+        initialRouteName="Home"
+        activeColor={colors.primary}
+        inactiveColor={colors.placeholder}>
+        {/* Home tab  */}
+        <Tab.Screen
+          name="Home"
+          component={HomeStackScreen}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarColor: colors.placeholderBackground,
+            tabBarIcon: ({color}) => (
+              <Icon name="home-outline" color={color} size={26} />
+            ),
+          }}
+        />
+        {/* Notification Tab  */}
+        <Tab.Screen
+          name="Delivery"
+          component={DeliveryStackScreen}
+          options={{
+            tabBarLabel: 'Delivery',
+            tabBarColor: colors.placeholderBackground,
+            tabBarIcon: ({color}) => (
+              <Delivery name="truck-delivery-outline" color={color} size={26} />
+            ),
+          }}
+        />
+        {/* History Tab  */}
+        <Tab.Screen
+          name="History"
+          component={HistoryStackScreen}
+          options={{
+            tabBarLabel: 'History',
+            tabBarColor: colors.placeholderBackground,
+            tabBarIcon: ({color}) => (
+              <History name="history-edu" color={color} size={26} />
+            ),
+          }}
+        />
+        {/* Account Tab  */}
+        <Tab.Screen
+          name="Account"
+          component={AccountStackScreen}
+          options={{
+            tabBarColor: colors.placeholderBackground,
+            tabBarLabel: 'Account',
+            tabBarIcon: ({color}) => (
+              <User name="user" color={color} size={26} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+      {/* Payment screen  */}
+      <Stack.Screen
+        name="PaymentList"
+        component={PaymentListScreen}
+        options={{}}
       />
-      {/* Notification Tab  */}
-      <Tab.Screen
-        name="Delivery"
-        component={DeliveryStackScreen}
-        options={{
-          tabBarLabel: 'Delivery',
-          tabBarColor: colors.placeholderBackground,
-          tabBarIcon: ({color}) => (
-            <Delivery name="truck-delivery-outline" color={color} size={26} />
-          ),
-        }}
-      />
-      {/* History Tab  */}
-      <Tab.Screen
-        name="History"
-        component={HistoryStackScreen}
-        options={{
-          tabBarLabel: 'History',
-          tabBarColor: colors.placeholderBackground,
-          tabBarIcon: ({color}) => (
-            <History name="history-edu" color={color} size={26} />
-          ),
-        }}
-      />
-      {/* Account Tab  */}
-      <Tab.Screen
-        name="Account"
-        component={AccountStackScreen}
-        options={{
-          tabBarColor: colors.placeholderBackground,
-          tabBarLabel: 'Account',
-          tabBarIcon: ({color}) => <User name="user" color={color} size={26} />,
-        }}
-      />
-    </Tab.Navigator>
+    </>
   );
 };
 
@@ -111,19 +131,19 @@ const DeliveryStackScreen = ({navigation}) => {
   );
 };
 
-const HistoryStackScreen = ({navigation}) => {
+const HistoryStackScreen = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: colors.placeholderBackground,
+          backgroundColor: colors.primary,
         },
-        headerTintColor: 'black',
+        headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="Profile" component={HistoryScreen} options={{}} />
+      <Stack.Screen name="History" component={HistoryScreen} options={{}} />
     </Stack.Navigator>
   );
 };
@@ -138,7 +158,7 @@ const AccountStackScreen = ({navigation}) => {
         headerTintColor: 'black',
         headerTitleStyle: {
           fontWeight: 'bold',
-          color:'#fff'
+          color: '#fff',
         },
       }}>
       <Stack.Screen name="Account" component={AccountScreen} options={{}} />

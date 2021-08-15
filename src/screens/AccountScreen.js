@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, SectionList} from 'react-native';
 import HeaderTransaction from '../components/HeaderTransaction';
 import PrimaryStatusBar from '../components/PrimaryStatusBar';
-import TransactionList from '../components/TransactionList';
+import TransactionList from '../components/list/TransactionList';
 import Transaction from '../model/transactions';
 
 const AccountScreen = () => {

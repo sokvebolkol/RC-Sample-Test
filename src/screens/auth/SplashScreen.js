@@ -6,17 +6,18 @@ import {
   Dimensions,
   StyleSheet,
   StatusBar,
-  Image,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import LinearGradient from "react-native-linear-gradient";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useNavigation } from "@react-navigation/native";
 
-const SplashScreen = ({ navigation }) => {
+const SplashScreen = () => {
   const { colors } = useTheme();
 
+  const navigation = useNavigation();
+f
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#009387" barStyle="light-content" />
@@ -50,7 +51,7 @@ const SplashScreen = ({ navigation }) => {
         </Text>
         <Text style={styles.text}>Sign in with account</Text>
         <View style={styles.button}>
-          <TouchableOpacity onPress={() => navigation.navigate("SignInScreen")}>
+          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
             <LinearGradient
               colors={["#08d4c4", "#01ab9d"]}
               style={styles.signIn}

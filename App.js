@@ -95,7 +95,7 @@ const App = () => {
 
   const authContext = useMemo(
     () => ({
-      signIn: async (foundUser) => {
+      login: async (foundUser) => {
         const userToken = String(foundUser[0].userToken);
         const userName = String(foundUser[0].username);
         try {
