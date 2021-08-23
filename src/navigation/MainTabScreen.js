@@ -1,6 +1,7 @@
 import React from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Text} from 'react-native';
 import Delivery from 'react-native-vector-icons/MaterialCommunityIcons';
 import User from 'react-native-vector-icons/Feather';
 import History from 'react-native-vector-icons/MaterialIcons';
@@ -15,15 +16,6 @@ import colors from '../common/colors';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
-
-// const RootStackScreen = (navigation) => {
-//   return (
-//     <RootStack.Navigator headerMode="none">
-//       <RootStack.Screen name="SplashScreen" component={SplashScreen} />
-//       <RootStack.Screen name="LoginScreen" component={LoginScreen} />
-//     </RootStack.Navigator>
-//   );
-// };
 
 const MainTabScreen = () => {
   return (
@@ -105,7 +97,13 @@ const HomeStackScreen = ({navigation}) => {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="Home" component={HomeScreen} options={{}} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -123,9 +121,11 @@ const DeliveryStackScreen = ({navigation}) => {
         },
       }}>
       <Stack.Screen
-        name="Notification"
+        name="Delivery"
         component={DeliveryScreen}
-        options={{}}
+        options={{
+          headerLeft: () => null,
+        }}
       />
     </Stack.Navigator>
   );
@@ -143,7 +143,9 @@ const HistoryStackScreen = () => {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="History" component={HistoryScreen} options={{}} />
+      <Stack.Screen name="History" component={HistoryScreen} options={{
+          headerLeft: () => null,
+      }} />
     </Stack.Navigator>
   );
 };
@@ -161,7 +163,9 @@ const AccountStackScreen = ({navigation}) => {
           color: '#fff',
         },
       }}>
-      <Stack.Screen name="Account" component={AccountScreen} options={{}} />
+      <Stack.Screen name="Account" component={AccountScreen} options={{
+          headerLeft: () => null,
+      }} />
     </Stack.Navigator>
   );
 };

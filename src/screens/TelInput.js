@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import PhoneInput from "react-native-phone-number-input";
+import colors from "../../common/colors";
 
 const TelInput: React.FC = () => {
 
@@ -14,9 +15,11 @@ const TelInput: React.FC = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView>
-          <View style={{ alignItems:'center'}}>
+        <View style={{ alignItems:'center'}}>
           <PhoneInput
             // ref={phoneInput}
+            containerStyle={{ borderRadius:10, borderWidth:1, borderColor:'#646d7e4d', backgroundColor:'#fff', width:'100%'}}
+            textContainerStyle={{ borderTopRightRadius:10, borderBottomRightRadius:10, borderColor:colors.secondary, backgroundColor:'#fff'}}
             defaultValue={value}
             defaultCode="KH"
             layout="first"
@@ -29,7 +32,6 @@ const TelInput: React.FC = () => {
             // onChangeFormattedText={(text) => {
             //   setFormattedValue(text);
             // }}
-            // withDarkTheme
           />
           </View>
           </KeyboardAvoidingView>

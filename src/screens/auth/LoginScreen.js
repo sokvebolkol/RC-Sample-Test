@@ -1,65 +1,93 @@
-import React, { useContext, useState } from "react";
-import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, {useState, useRef} from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  KeyboardAvoidingView,
+  Alert,
+} from 'react-native';
+
+import {useNavigation} from '@react-navigation/native';
+import PhoneInput from 'react-native-phone-number-input';
 import colors from '../../common/colors';
 import LinearGradient from 'react-native-linear-gradient';
-import TelInput from './TelInput';
-import Users from "../../model/users";
-import { AuthContext } from "../../components/context";
-
 
 const LoginScreen = () => {
-  const { login } = useContext(AuthContext);
-
-  const [data, setData] = useState({
-      username: "",
-      password: "",
-      isValidUser: true,
-      isValidPassword: true,
-      check_textInputChange: false,
-      secureTextEntry: true,
-  });
+  const [value, setValue] = useState('');
+  const [formattedValue, setFormattedValue] = useState('');
+  const [valid, setValid] = useState(false);
   const navigation = useNavigation();
-
+  const phoneInput = useRef();
 
   const _handleLogin = () => {
-    
-    const foundUser = Users.filter((item) => {
-        return true;
-        // return userName == item.username && password == item.password;
-        // return phoneNumber = item.phoneNumber;
-    });
-
-    // if (data.username.length == 0 || data.password == 0) {
-    //     Alert.alert(
-    //         "Wrong Input!",
-    //         "Username or Password field cannot be empty!!",
-    //         [{ text: "Okay" }]
-    //     );
-    //     return;
-    // }
-
-    // if (foundUser == 0) {
-    //     Alert.alert("Invalid User!", "Username or Password is incorrect!", [
-    //         { text: "Okay" },
-    //     ]);
-    //     return;
-    // }
-    login(foundUser);
-    navigation.navigate("Home");
-  }
+    const checkValid = phoneInput.current?.isValidNumber(value); // length > 10
+    setValid(checkValid ? checkValid : false);
+    if (valid) {
+      navigation.navigate('OTPScreen', {
+        phoneNumber: formattedValue,
+      });
+    } else {
+      Alert.alert('Problem', 'Phone number is invalid. Please try again!', [
+        {text: 'OK'},
+      ]);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
+      <View style={styles.header}>
+        <Image
+          style={styles.imgLogo}
+          source={{
+            uri:
+              'https://www.logofootball.net/wp-content/uploads/Real-Madrid-CF-Logo.png',
+          }}
+          width={100}
+          height={100}
+          resizeMode="contain"
+        />
+      </View>
       <View style={styles.body}>
-        <TelInput />
+        <KeyboardAvoidingView>
+          <View style={{alignItems: 'center'}}>
+            <PhoneInput
+              ref={phoneInput}
+              containerStyle={{
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: '#646d7e4d',
+                backgroundColor: '#fff',
+                width: '100%',
+              }}
+              textContainerStyle={{
+                borderTopRightRadius: 10,
+                borderBottomRightRadius: 10,
+                borderColor: colors.secondary,
+                backgroundColor: '#fff',
+              }}
+              defaultValue={value}
+              defaultCode="KH"
+              layout="first"
+              withShadow={false}
+              keyboardType="text"
+              autoFocus={true}
+              onChangeText={text => {
+                setValue(text);
+              }}
+              onChangeFormattedText={text => {
+                setFormattedValue(text);
+              }}
+            />
+          </View>
+        </KeyboardAvoidingView>
         <View style={styles.button}>
           <TouchableOpacity onPress={_handleLogin}>
             <LinearGradient
-              colors={['#fff','#fff']}
-              style={styles.login}>
-              <Text style={styles.textSign}>Login</Text>
+              colors={[colors.primary, colors.primary]}
+              style={styles.next}>
+              <Text style={styles.textSign}>NEXT</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -73,31 +101,37 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.primary,
   },
   header: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imgLogo: {
+    width: 200,
+    height: 200,
   },
   body: {
     flex: 1.5,
-    backgroundColor: colors.primary,
+    backgroundColor: '#fff',
     borderRadius: 30,
     paddingVertical: 100,
     paddingHorizontal: 20,
   },
   button: {
-    marginTop: 50, 
+    marginTop: 50,
   },
-  textSign:{
+  textSign: {
+    color: '#fff',
     fontWeight: 'bold',
   },
-  login: {
+  next: {
     width: '100%',
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 15,
-    flexDirection: "row",
-
+    flexDirection: 'row',
   },
 });
