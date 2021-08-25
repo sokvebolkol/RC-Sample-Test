@@ -10,8 +10,10 @@ import {
 import BrandingHeadBar from '../components/BrandingHeadBar';
 import color from '../common/colors';
 import colors from '../utils/Colors';
+import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 
 const HomeScreen = () => {
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -23,6 +25,21 @@ const HomeScreen = () => {
             <Text style={styles.readMore}>Read More</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={{flex: 1}}>
+        <MapView
+          style={{width: '100%', height: '100%'}}
+          showsUserLocation={true}
+          userLocationPriority={'high'}
+          userLocationUpdateInterval={5000}
+          userLocationFastestInterval={5000}
+          zoomEnabled={true}
+          zoomTapEnabled={true}
+          minZoomLevel={8}>
+          <Marker 
+            coordinate={{}}
+          />
+          </MapView>
       </View>
     </SafeAreaView>
   );
@@ -41,8 +58,8 @@ const styles = StyleSheet.create({
   bottomContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor:color.readed,
-    borderBottomWidth:0.5,
+    borderColor: color.readed,
+    borderBottomWidth: 0.5,
     paddingBottom: 13,
     paddingTop: 4,
   },
