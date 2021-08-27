@@ -11,9 +11,9 @@ import BrandingHeadBar from '../components/BrandingHeadBar';
 import color from '../common/colors';
 import colors from '../utils/Colors';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import DeliveryBottomSheet from '../components/DeliveryBottomSheet';
 
 const HomeScreen = () => {
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -36,11 +36,10 @@ const HomeScreen = () => {
           zoomEnabled={true}
           zoomTapEnabled={true}
           minZoomLevel={8}>
-          <Marker 
-            coordinate={{}}
-          />
-          </MapView>
+          <Marker coordinate={{}} />
+        </MapView>
       </View>
+      <DeliveryBottomSheet />
     </SafeAreaView>
   );
 };

@@ -11,7 +11,6 @@ import DeliveryScreen from '../screens/DeliveryScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import AccountScreen from '../screens/AccountScreen';
 import PaymentListScreen from '../screens/PaymentList/PaymentListScreen';
-
 import colors from '../common/colors';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -143,9 +142,13 @@ const HistoryStackScreen = () => {
           fontWeight: 'bold',
         },
       }}>
-      <Stack.Screen name="History" component={HistoryScreen} options={{
+      <Stack.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
           headerLeft: () => null,
-      }} />
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -163,9 +166,14 @@ const AccountStackScreen = ({navigation}) => {
           color: '#fff',
         },
       }}>
-      <Stack.Screen name="Account" component={AccountScreen} options={{
+      <Stack.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{
           headerLeft: () => null,
-      }} />
+        }}
+      />
     </Stack.Navigator>
   );
 };
+

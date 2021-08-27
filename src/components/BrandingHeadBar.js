@@ -15,7 +15,9 @@ const BrandingHeadBar = memo(() => {
     <View style={styles.container} edges={['top']}>
       <Text style={styles.logoText}>Delivery</Text>
       <View style={styles.topRightIcon}>
-        <TouchableOpacity style={styles.bgAvatar}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('More')}
+          style={styles.bgAvatar}>
           <Image
             source={{
               uri:
@@ -24,7 +26,7 @@ const BrandingHeadBar = memo(() => {
             style={styles.avatar}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() =>navigation.navigate('Notification')}>
           <Image source={imgNotification} style={styles.image} />
         </TouchableOpacity>
         <TouchableOpacity>
@@ -75,6 +77,6 @@ const styles = StyleSheet.create({
     height: 32,
     resizeMode: 'contain',
     padding: 5,
-    marginHorizontal:5
+    marginHorizontal: 5,
   },
 });

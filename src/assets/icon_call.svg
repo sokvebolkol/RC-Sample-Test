@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+  <g id="Group_2644" data-name="Group 2644" transform="translate(0 0.275)">
+    <circle id="Ellipse_14" data-name="Ellipse 14" cx="18" cy="18" r="18" transform="translate(0 -0.275)" fill="#48dc6a"/>
+    <g id="Iconly_Bold_Call" data-name="Iconly/Bold/Call" transform="translate(8 7.725)">
+      <g id="Call" transform="translate(1.666 1.667)">
+        <path id="Call-2" data-name="Call" d="M13.472,10.316a1.9,1.9,0,0,0-1.395.366c-.4.234-1.165.853-1.6.695a9.943,9.943,0,0,1-5.26-5.134C5.054,5.8,5.67,5.028,5.9,4.622a1.946,1.946,0,0,0,.364-1.4A11.421,11.421,0,0,0,4.325.512,1.594,1.594,0,0,0,3.351,0C2.1-.052.7,1.617.458,2.016a3.244,3.244,0,0,0,.01,3.359c1.5,3.69,7.155,9.26,10.859,10.812a4.476,4.476,0,0,0,1.87.48,2.432,2.432,0,0,0,1.459-.457c.317-.183,2.055-1.649,2.009-2.934a1.618,1.618,0,0,0-.506-.972,11.5,11.5,0,0,0-2.687-1.987" transform="translate(0 0)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
