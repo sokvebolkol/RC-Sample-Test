@@ -12,7 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 import RequestAddress from '../components/RequestAddress';
 import LinearGradient from 'react-native-linear-gradient';
 import colors from '../common/colors';
-import OperatorBottomSheet from '../components/operators/OperatorBottomSheet';
 import OperatorListItem from '../components/operators/OperatorListItem';
 import Modal from "react-native-modal";
 
