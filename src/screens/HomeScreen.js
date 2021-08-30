@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import BrandingHeadBar from '../components/BrandingHeadBar';
 import color from '../common/colors';
 import colors from '../utils/Colors';
@@ -14,6 +15,7 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import DeliveryBottomSheet from '../components/DeliveryBottomSheet';
 
 const HomeScreen = () => {
+  const navigation= useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
@@ -21,7 +23,7 @@ const HomeScreen = () => {
         <View style={styles.bottomContainer}>
           <Text style={styles.txtFee}>1$</Text>
           <Text style={styles.text}>Promotion for everywhere</Text>
-          <TouchableOpacity style={styles.btnReadMore}>
+          <TouchableOpacity style={styles.btnReadMore} onPress={navigation.navigate('ok')}>
             <Text style={styles.readMore}>Read More</Text>
           </TouchableOpacity>
         </View>

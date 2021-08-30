@@ -10,7 +10,7 @@ const RequestButton = memo(() => {
   const navigation = useNavigation();
   const _handleRequest = () =>{
       ProgressModal.show();
-    navigation.navigate('MainStack');
+    navigation.navigate('Request');
   };
 
   return (

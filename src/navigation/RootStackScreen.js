@@ -5,10 +5,12 @@ import LoginScreen from "../screens/auth/LoginScreen";
 import OTPScreen from "../screens/phoneAuth/OTPScreen";
 import SuccessScreen from "../screens/phoneAuth/SuccessScreen";
 import MainTabScreen from "./MainTabScreen";
-import MainStackScreen from "./MainStackScreen";
-import MoreScreen from "../screens/more/MoreScreen";
-import NotificationScreen from "../screens/notification/NotificationScreen";
+import RequestBookingStack from "./stack/RequestBookingStack";
+import MoreStack from "./stack/MoreStack";
+import colors from "../utils/Colors";
 import NotificationDetailScreen from "../screens/notification/NotificationDetailScreen";
+import NotificationStack from "./stack/NotificationStack";
+import Ok from "../screens/Ok";
 
 const RootStack = createStackNavigator();
 
@@ -20,11 +22,11 @@ const RootStackScreen = () => {
       <RootStack.Screen name="OTPScreen" component={OTPScreen} />
       <RootStack.Screen name="SuccessScreen" component={SuccessScreen} /> */}
       <RootStack.Screen name="MainTabScreen" component={MainTabScreen}/>
-      <RootStack.Screen name="MainStack" component={MainStackScreen}/>
-      <RootStack.Screen name="More" component={MoreScreen}/>
-      <RootStack.Screen name="Notification" component={NotificationScreen}/>
+      <RootStack.Screen name="Request" component={RequestBookingStack}/>
+      <RootStack.Screen name="More" component={MoreStack}/>
+      <RootStack.Screen name="Notification" component={NotificationStack}/>
       <RootStack.Screen name="NotificationDetail" component={NotificationDetailScreen}/>
-
+      <RootStack.Screen name="ok" component={Ok}/>
     </RootStack.Navigator>
   );
 };

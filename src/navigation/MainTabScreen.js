@@ -1,7 +1,6 @@
 import React from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Text} from 'react-native';
 import Delivery from 'react-native-vector-icons/MaterialCommunityIcons';
 import User from 'react-native-vector-icons/Feather';
 import History from 'react-native-vector-icons/MaterialIcons';
@@ -164,7 +163,7 @@ const AccountStackScreen = ({navigation}) => {
         headerTitleStyle: {
           fontWeight: 'bold',
           color: '#fff',
-        },
+        }
       }}>
       <Stack.Screen
         name="Account"

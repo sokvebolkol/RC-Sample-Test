@@ -107,7 +107,7 @@ export default MoreScreen;
 
 const styles = StyleSheet.create({
   topSpace: {
-    height: 108,
+    height: 18,
     backgroundColor: colors.primary,
   },
   profile: {
