@@ -111,9 +111,9 @@ const DeliveryStackScreen = ({navigation}) => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: colors.placeholderBackground,
+          backgroundColor: colors.primary,
         },
-        headerTintColor: 'black',
+        headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
         },

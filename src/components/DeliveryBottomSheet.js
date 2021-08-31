@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-// import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import RequestButton from './RequestButton';
 // import CurrentLocationButton from '@app/components/buttons/CurrentLocationButton';
 // import Geolocation from 'react-native-geolocation-service';
